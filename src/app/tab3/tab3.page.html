@@ -1,39 +1,34 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Groceries
+      {{title}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-list>
-    <ion-item-sliding>
-      <ion-item>
-        <ion-label>Milk</ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option (click)="unread(item)">Unread</ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  
-    <ion-item-sliding>
-      <ion-item>
-        <ion-label>Eggs</ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option (click)="unread(item)">Unread</ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
 
-    <ion-item-sliding>
+    <ion-item-sliding *ngFor="let item of items; let i-index">
       <ion-item>
-        <ion-label>Bread</ion-label>
+        <ion-label>{{item.name}}</ion-label>
+        <p>{{item.qty}}</p>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option (click)="unread(item)">Unread</ion-item-option>
+        <button ion-button (click)="removeItem(item, i)" color="secondary" icon-start>
+          <ion-icon name="trash"></ion-icon>
+          Done
+        </button>
       </ion-item-options>
     </ion-item-sliding>
-
   </ion-list>
+
+
+  <!-- fab placed to the bottom end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button mini (click)="addItem()">
+      <ion-icon name="basket"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

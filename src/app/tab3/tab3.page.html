@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header> 
 
-<ion-content padding>
+<ion-content>
   <ion-list>
 
     <ion-item-sliding *ngFor="let item of items; let i-index">
@@ -15,7 +15,12 @@
         <p>{{item.qty}}</p>
       </ion-item>
       <ion-item-options side="end">
-        <button ion-button (click)="removeItem(item, i)" color="secondary" icon-start>
+        <button ion-button (click)="editItem(item, i)" color="--ion-color-primary" icon-start>
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+
+        <button ion-button (click)="removeItem(item, i)" color="--ion-color-secondary" icon-start>
           <ion-icon name="trash"></ion-icon>
           Done
         </button>

@@ -5,22 +5,32 @@
     </ion-title>
   </ion-toolbar>
 </ion-header> 
+ 
+<ion-content >
 
-<ion-content>
+  <h3 text-center *ngIf="loadItems().length === 0">
+    No Items Available on the List. 
+  </h3>
+
   <ion-list>
 
-    <ion-item-sliding *ngFor="let item of items; let i-index">
+    <ion-item-sliding *ngFor="let item of loadItems(); let i-index">
       <ion-item>
         <ion-label>{{item.name}}</ion-label>
         <p>{{item.qty}}</p>
       </ion-item>
       <ion-item-options side="end">
-        <button ion-button (click)="editItem(item, i)" color="--ion-color-primary" icon-start>
+        <button ion-button (click)="editItem(item, item)" color="--ion-color-primary" icon-start>
           <ion-icon name="create"></ion-icon>
           Edit
         </button>
 
-        <button ion-button (click)="removeItem(item, i)" color="--ion-color-secondary" icon-start>
+        <button ion-button (click)="shareItem(item, item)" color="light" icon-start>
+          <ion-icon name="share"></ion-icon>
+          Share
+        </button>
+
+        <button ion-button (click)="removeItem(item, item)" color="--ion-color-secondary" icon-start>
           <ion-icon name="trash"></ion-icon>
           Done
         </button>

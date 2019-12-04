@@ -18,6 +18,10 @@ export class Tab3Page {
 
   title = "Grocery List";
 
+  items = [];
+  errorMessage: string;
+
+
   constructor(public navCtrl: NavController, 
     public toastController: ToastController, 
     public alertController: AlertController,
@@ -26,10 +30,21 @@ export class Tab3Page {
     public InputDialogService: InputDialogServiceService,
     public socialSharing: SocialSharing
     )
-    { }
+    {
+      dataService.dataChanged$.subscribe((dataChanged: boolean) => {
+        this.loadItems();
+      });
+     }
 
+  ionViewDidLoad() {
+    this.loadItems();
+  }
+  
   loadItems(){
-    return this.dataService.getItems();
+    this.dataService.getItems()
+      .subscribe(
+        items => items = items,
+        error => this.errorMessage = <any>error);
   }
 
 
@@ -73,7 +88,7 @@ export class Tab3Page {
     });
     toast.present();
 
-    let message = "Grocer Item - Name: " + item.name + " - Quantity: " + item.Quantity;
+    let message = "Grocery Item - Name: " + item.name + " - Quantity: " + item.Quantity;
     let subject = "Shared via Groceries app";
     this.socialSharing.share(message, subject).then(() => {
         console.log("Shared successfully")
